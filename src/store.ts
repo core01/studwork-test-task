@@ -75,13 +75,15 @@ const actions: ActionTree<AppState, any> = {
           next = next.replace(/[^0-9]/g, '');
         }
 
-        store.commit('SET_LOADING', false);
         store.commit('SET_NEXT_PAGE', next);
       })
       .catch(() => {
         // handle error
         (notifier as any).$noty.error('Упс! Ошибочка вышла, попробуйте позже!');
         // TODO add error log
+      })
+      .then(() => {
+        store.commit('SET_LOADING', false);
       });
   }
 };

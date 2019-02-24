@@ -22,11 +22,14 @@ export default class Starship extends Vue {
       .get('https://swapi.co/api/starships/' + this.$route.params.id + '/')
       .then(response => {
         this.ship = response.data;
-        this.$store.commit('SET_LOADING', false);
+
       })
       .catch(() => {
         (this as any).$noty.error('Упс! Ошибочка вышла, попробуйте позже!');
         // TODO add error log
+      })
+      .then(() => {
+        this.$store.commit('SET_LOADING', false);
       });
   }
 }
